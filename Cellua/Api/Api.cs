@@ -29,6 +29,11 @@ namespace Cellua.Api
         {
             Scene.Tiles.Data[x, y].TypeId = typeid;
         }
+
+        public uint GetTileTypeId(uint x, uint y)
+        {
+            return Scene.Tiles.Data[x, y].TypeId;
+        }
     }
     
     public class WindowApi
