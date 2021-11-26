@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MoonSharp" Version="2.0.0" />
+      <PackageReference Include="SFML.Net" Version="2.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="UI" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="res\OpenSans-Regular.ttf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="plugins\main.lua">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
