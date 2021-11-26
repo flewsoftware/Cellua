@@ -24,6 +24,11 @@ namespace Cellua.Api
             Scene.Tiles.Data[x, y].Color.A = a;
             Scene.ChangeMap.Data[x, y] = true;
         }
+
+        public void SetTileTypeId(uint x, uint y, uint typeid)
+        {
+            Scene.Tiles.Data[x, y].TypeId = typeid;
+        }
     }
     
     public class WindowApi
