@@ -16,7 +16,7 @@ namespace Cellua.Api
             Scene = scene;
         }
 
-        public void ChangeColor(uint x, uint y, byte r, byte g, byte b, byte a)
+        public void SetColor(uint x, uint y, byte r, byte g, byte b, byte a)
         {
             Scene.Tiles.Data[x, y].Color.R = r;
             Scene.Tiles.Data[x, y].Color.G = g;
