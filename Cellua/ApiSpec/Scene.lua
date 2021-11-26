@@ -7,7 +7,7 @@
 ---@param g number Green value of the tile
 ---@param b number Blue value of the tile
 ---@param a number Alpha value of the tile
-function Scene.ChangeColor(x, y, r, g, b, a) end
+function Scene.SetColor(x, y, r, g, b, a) end
 
 --- Change type id of the tile
 ---@param x number x position of the tile
