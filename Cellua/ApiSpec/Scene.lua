@@ -14,3 +14,9 @@ function Scene.ChangeColor(x, y, r, g, b, a) end
 ---@param y number y position of the tile
 ---@param typeid number type id to set
 function Scene.SetTileTypeId(x, y, typeid) end
+
+--- Returns type id of the tile
+---@param x number x position of the tile
+---@param y number y position of the tile
+---@return number tile type id
+function Scene.GetTileTypeId(x, y) end
