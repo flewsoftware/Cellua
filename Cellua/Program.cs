@@ -7,7 +7,7 @@ using SFML.Window;
 
 var scene = new Scene(new SceneInfo(800));
 
-RenderWindow window = new(new VideoMode(scene.SceneInfo.Size, scene.SceneInfo.Size), "test");
+RenderWindow window = new(new VideoMode(scene.SceneInfo.Size, scene.SceneInfo.Size), "Cellua");
 window.SetFramerateLimit(0);
 window.Clear();
 
