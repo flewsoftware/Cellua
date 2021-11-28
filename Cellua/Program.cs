@@ -43,7 +43,7 @@ void RenderFunc()
 ScriptManager.RegisterTypes();
 MoonSharp.Interpreter.Script.WarmUp();
 ScriptManager sm = new(scene, window, RenderFunc);
-sm.LoadFromFolder("./plugins");
+sm.LoadFromFolder("./scripts");
 
 
 var s = sm.NewScriptWithGlobals();
