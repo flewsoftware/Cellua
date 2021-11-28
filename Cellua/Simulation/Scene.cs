@@ -36,7 +36,6 @@ namespace Cellua.Simulation
                     Tiles.Data[x, y] = new Tile
                     {
                         TypeId = 0,
-                        Uid = x+y,
                         Color = Color.Black
                     };
                 }

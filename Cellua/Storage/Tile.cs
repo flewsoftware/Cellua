@@ -12,12 +12,7 @@ namespace Cellua.Storage
         /// A ID that more than one tile will share
         /// </summary>
         public uint TypeId;
-
-        /// <summary>
-        /// Unique id
-        /// </summary>
-        public uint Uid;
-
+        
         public Color Color;
     }
 }
