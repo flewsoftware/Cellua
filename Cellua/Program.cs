@@ -25,49 +25,26 @@ var framerateText = new Text("", new Font("res/OpenSans-Regular.ttf"));
 window.Closed += (_, _) => { window.Close(); };
 #endregion
 
-
-ScriptManager.RegisterTypes();
-MoonSharp.Interpreter.Script.WarmUp();
-ScriptManager sm = new(scene);
-sm.LoadFromFolder("./plugins");
-
-
-#region ApiEvents
-sm.WindowApi.TitleChangedE += (_, newTitle) =>
+void RenderFunc()
 {
-    window.SetTitle(newTitle);
-};
-sm.WindowApi.ClearE += (_, _) =>
-{
-    window.Clear();
-};
-sm.WindowApi.CloseE += (_, _) =>
-{
-    window.Close();
-};
-sm.WindowApi.FramerateLimitChangedE += (_, limit) =>
-{
-    window.SetFramerateLimit(limit);
-};
-#endregion
-
-var s = sm.NewScriptWithGlobals();
-sm.RunScript(s, "main.lua");
-
-while (window.IsOpen)
-{
-    window.Clear();
-    
-    framerateText.DisplayedString = Math.Round(1.0/dt) + " FPS";
+    framerateText.DisplayedString = Math.Round(1.0 / dt) + " FPS";
     window.DispatchEvents();
-    
 
     scene.UpdatePixels(true);
     scene.UpdateTexture(worldTexture);
-    
+
     window.Draw(worldSprite);
     window.Draw(framerateText);
-    
+
     window.Display();
     dt = clock.Restart().AsSeconds();
 }
+
+ScriptManager.RegisterTypes();
+MoonSharp.Interpreter.Script.WarmUp();
+ScriptManager sm = new(scene, window, RenderFunc);
+sm.LoadFromFolder("./plugins");
+
+
+var s = sm.NewScriptWithGlobals();
+sm.RunScript(s, "main.lua");

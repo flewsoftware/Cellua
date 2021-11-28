@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using Cellua.Random;
 using Cellua.Simulation;
 using MoonSharp.Interpreter;
+using SFML.Graphics;
 
 namespace Cellua.Api
 {
@@ -46,27 +48,41 @@ namespace Cellua.Api
     
     public class WindowApi
     {
-        [MoonSharpHidden] public event EventHandler<uint>? FramerateLimitChangedE;
-        [MoonSharpHidden] public event EventHandler<string>? TitleChangedE;
-        [MoonSharpHidden] public event EventHandler? ClearE;
-        [MoonSharpHidden] public event EventHandler? CloseE; 
+        [MoonSharpHidden] public RenderWindow Window;
 
-        public void SetTitle(string title)
+        [MoonSharpHidden] public Action DisplayFunc;
+
+        public WindowApi(RenderWindow window, Action displayFunc)
         {
-            TitleChangedE?.Invoke(this, title);
+            Window = window;
+            DisplayFunc = displayFunc;
         }
 
+        public bool IsOpen()
+        {
+            return Window.IsOpen;
+        }
+        
+        public void SetTitle(string title)
+        {
+            Window.SetTitle(title);
+        }
+
+        public void Display()
+        {
+            DisplayFunc();
+        }
         public void Close()
         {
-            CloseE?.Invoke(this, EventArgs.Empty);
+            Window.Close();
         }
         public void Clear()
         {
-            ClearE?.Invoke(this, EventArgs.Empty);
+            Window.Clear();
         }
         public void SetFramerateLimit(uint framerate)
         {
-            FramerateLimitChangedE?.Invoke(this, framerate);
+            Window.SetFramerateLimit(framerate);
         }
     }
     
@@ -84,17 +100,20 @@ namespace Cellua.Api
 
     public class ScriptManager
     {
-        public Dictionary<string, string> Scripts = new();
+        public Dictionary<string, string> Scripts;
 
         public readonly RandomApi RandomApi;
         public readonly WindowApi WindowApi;
+        public readonly SystemApi SystemApi;
         public SceneApi SceneApi;
 
-        public ScriptManager(Scene scene)
+        public ScriptManager(Scene scene, RenderWindow window, Action renderFunc)
         {
             SceneApi = new SceneApi(scene);
             RandomApi = new RandomApi();
-            WindowApi = new WindowApi();
+            WindowApi = new WindowApi(window, renderFunc);
+            SystemApi = new SystemApi();
+            Scripts = new Dictionary<string, string>();
         }
         
         public static void RegisterTypes()
