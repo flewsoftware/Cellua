@@ -4,6 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <OutputType>Exe</OutputType>
+        <LangVersion>default</LangVersion>
+        <Company>Flew Software</Company>
     </PropertyGroup>
 
     <ItemGroup>
