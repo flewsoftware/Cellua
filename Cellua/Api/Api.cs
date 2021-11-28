@@ -7,6 +7,14 @@ using MoonSharp.Interpreter;
 
 namespace Cellua.Api
 {
+    public class SystemApi
+    {
+        public static void Sleep(int ms)
+        {
+            Thread.Sleep(ms);
+        }
+    }
+    
     public class SceneApi
     {
         [MoonSharpHidden] public Scene Scene;
@@ -95,6 +103,7 @@ namespace Cellua.Api
             UserData.RegisterType<RandomBool>();
             UserData.RegisterType<WindowApi>();
             UserData.RegisterType<SceneApi>();
+            UserData.RegisterType<SystemApi>();
         }
         
         public Script NewScriptWithGlobals()
@@ -105,7 +114,8 @@ namespace Cellua.Api
                 {
                     ["Random"] = RandomApi,
                     ["Window"] = WindowApi,
-                    ["Scene"] = SceneApi
+                    ["Scene"] = SceneApi,
+                    ["System"] = SystemApi
                 }
             };
         }
