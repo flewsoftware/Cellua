@@ -436,5 +436,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 
-plugins/
+scripts/
 .idea/
