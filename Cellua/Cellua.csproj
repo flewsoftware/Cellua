@@ -19,7 +19,7 @@
       <None Update="res\OpenSans-Regular.ttf">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="plugins\main.lua">
+      <None Update="scripts\main.lua">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
