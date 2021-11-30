@@ -6,6 +6,8 @@
         <OutputType>Exe</OutputType>
         <LangVersion>default</LangVersion>
         <Company>Flew Software</Company>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
