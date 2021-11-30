@@ -1,5 +1,5 @@
 ﻿using System;
-using Cellua.Api;
+using Api = Cellua.Api;
 using Cellua.Simulation;
 using SFML.Graphics;
 using SFML.System;
@@ -40,9 +40,9 @@ void RenderFunc()
     dt = clock.Restart().AsSeconds();
 }
 
-ScriptManager.RegisterTypes();
+Api.Lua.ScriptManagerUtils.RegisterTypes();
 MoonSharp.Interpreter.Script.WarmUp();
-ScriptManager sm = new(scene, window, RenderFunc);
+Api.Lua.ScriptManager sm = new(scene, window, RenderFunc);
 sm.LoadFromFolder("./scripts");
 
 
