@@ -16,8 +16,9 @@ namespace Cellua.Api.Lua
             UserData.RegisterType<RandomApi>();
             UserData.RegisterType<RandomBool>();
             UserData.RegisterType<WindowApi>();
-            UserData.RegisterType<SceneApi>();
+            UserData.RegisterType<SceneObject>();
             UserData.RegisterType<SystemApi>();
+            UserData.RegisterType<WindowObject>();
         }
     }
     
@@ -28,11 +29,9 @@ namespace Cellua.Api.Lua
         public readonly RandomApi RandomApi;
         public readonly WindowApi WindowApi;
         public readonly SystemApi SystemApi;
-        public SceneApi SceneApi;
 
-        public ScriptManager(Scene scene, RenderWindow window, Action renderFunc)
+        public ScriptManager(Scene scene, RenderWindow window, Action<WindowObject> renderFunc)
         {
-            SceneApi = new SceneApi(scene);
             RandomApi = new RandomApi();
             WindowApi = new WindowApi(window, renderFunc);
             SystemApi = new SystemApi();
@@ -47,7 +46,6 @@ namespace Cellua.Api.Lua
                 {
                     ["Random"] = RandomApi,
                     ["Window"] = WindowApi,
-                    ["Scene"] = SceneApi,
                     ["System"] = SystemApi
                 }
             };

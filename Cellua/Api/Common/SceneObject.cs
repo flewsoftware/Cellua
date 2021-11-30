@@ -2,11 +2,11 @@
 
 namespace Cellua.Api.Common
 {
-    public class SceneApi
+    public class SceneObject
     {
         public Scene Scene;
 
-        public SceneApi(Scene scene)
+        public SceneObject(Scene scene)
         {
             Scene = scene;
         }
