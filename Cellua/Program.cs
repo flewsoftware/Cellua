@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Cellua.Api.Common;
 using Api = Cellua.Api;
 using Cellua.Simulation;
 using SFML.Graphics;
-using SFML.System;
 using SFML.Window;
 
 var scene = new Scene(new SceneInfo(800));
@@ -14,30 +13,17 @@ window.Clear();
 Texture worldTexture = new(scene.SceneInfo.Size, scene.SceneInfo.Size);
 Sprite worldSprite = new(worldTexture);
 
-Clock clock = new();
-var dt = 0.0;
-
-#region UI
-var framerateText = new Text("", new Font("res/OpenSans-Regular.ttf"));
-#endregion
-
-#region Events
-window.Closed += (_, _) => { window.Close(); };
-#endregion
-
-void RenderFunc()
+void RenderFunc(WindowObject wo)
 {
-    framerateText.DisplayedString = Math.Round(1.0 / dt) + " FPS";
-    window.DispatchEvents();
+    wo.Window.DispatchEvents();
 
-    scene.UpdatePixels(true);
-    scene.UpdateTexture(worldTexture);
+    wo.Scene.Scene.UpdatePixels(true);
+    wo.Scene.Scene.UpdateTexture(worldTexture);
 
-    window.Draw(worldSprite);
-    window.Draw(framerateText);
+    wo.Window.Draw(worldSprite);
 
-    window.Display();
-    dt = clock.Restart().AsSeconds();
+    wo.Window.Display();
+    wo.Dt = wo.Clock.Restart().AsSeconds();
 }
 
 Api.Lua.ScriptManagerUtils.RegisterTypes();
