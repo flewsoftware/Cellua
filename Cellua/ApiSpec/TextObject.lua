@@ -8,7 +8,7 @@ function TextObject.UseFont(font) end
 
 
 --- Returns the position of the text in screen
----@return number, number x & y positions
+---@return table x & y positions
 function TextObject.GetPosition() end
 
 
