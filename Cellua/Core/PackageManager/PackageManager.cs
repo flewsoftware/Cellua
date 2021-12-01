@@ -16,7 +16,7 @@ namespace Cellua.Core.PackageManager
         
         public void LoadConfiguration(string config)
         {
-            Config = JsonConvert.DeserializeObject<Config>(config);
+            Config = JsonConvert.DeserializeObject<Config>(config) ?? throw new JsonSerializationException("Cant deserialize config file.");
         }
 
         public void LoadFromFile(string location)
