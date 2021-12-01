@@ -29,3 +29,11 @@ function WindowObject.GetFramerate() end
 --- Returns a SceneObject
 ---@return SceneObject
 function WindowObject.GetScene() end
+
+--- Adds a text object to the text rendering queue
+---@param text TextObject
+function WindowObject.AddText(text) end
+
+--- Removes a text object to the text rendering queue
+---@param text TextObject
+function WindowObject.RemoveText(text) end

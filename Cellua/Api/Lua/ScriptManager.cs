@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Cellua.Api.Common;
+using Cellua.Api.CommonManager;
 using Cellua.Random;
 using Cellua.Simulation;
 using MoonSharp.Interpreter;
@@ -19,6 +20,10 @@ namespace Cellua.Api.Lua
             UserData.RegisterType<SceneObject>();
             UserData.RegisterType<SystemApi>();
             UserData.RegisterType<WindowObject>();
+            UserData.RegisterType<FontApi>();
+            UserData.RegisterType<FontObject>();
+            UserData.RegisterType<TextApi>();
+            UserData.RegisterType<TextObject>();
         }
     }
 
@@ -29,13 +34,17 @@ namespace Cellua.Api.Lua
         public readonly RandomApi RandomApi;
         public readonly WindowApi WindowApi;
         public readonly SystemApi SystemApi;
-
-        public ScriptManager(Scene scene, RenderWindow window, Action<WindowObject> renderFunc)
+        public readonly FontApi FontApi;
+        public readonly TextApi TextApi;
+        
+        public ScriptManager(Scene scene, RenderWindow window, Action<WindowObject> renderFunc, FontManger fontManger)
         {
             RandomApi = new RandomApi();
             WindowApi = new WindowApi(window, renderFunc);
             SystemApi = new SystemApi();
             MainScript = "";
+            FontApi = new FontApi(fontManger);
+            TextApi = new TextApi();
         }
         
         public Script NewScriptWithGlobals(string[] modulePath)
@@ -46,7 +55,9 @@ namespace Cellua.Api.Lua
                 {
                     ["Random"] = RandomApi,
                     ["Window"] = WindowApi,
-                    ["System"] = SystemApi
+                    ["System"] = SystemApi,
+                    ["Font"] = FontApi,
+                    ["Text"] = TextApi
                 }
             };
            var fileSystemLoader = new FileSystemScriptLoader
