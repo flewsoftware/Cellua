@@ -1,4 +1,6 @@
-﻿using Cellua.Api.Common;
+﻿using System;
+using Cellua.Api.Common;
+using Cellua.Core.PackageManager;
 using Api = Cellua.Api;
 using Cellua.Simulation;
 using SFML.Graphics;
@@ -12,6 +14,18 @@ window.Clear();
 
 Texture worldTexture = new(scene.SceneInfo.Size, scene.SceneInfo.Size);
 Sprite worldSprite = new(worldTexture);
+
+
+PackageManager pkgManger = new();
+try
+{
+    pkgManger.LoadFromFile("./package.json");
+}
+catch (Exception e)
+{
+    Console.WriteLine("Unable to find package.json in the current directory", e);
+    throw;
+}
 
 void RenderFunc(WindowObject wo)
 {
@@ -29,8 +43,17 @@ void RenderFunc(WindowObject wo)
 Api.Lua.ScriptManagerUtils.RegisterTypes();
 MoonSharp.Interpreter.Script.WarmUp();
 Api.Lua.ScriptManager sm = new(scene, window, RenderFunc);
-sm.LoadFromFolder("./scripts");
+
+try
+{
+    sm.LoadMainFile(pkgManger.Config.Main);
+}
+catch (Exception e)
+{
+    Console.WriteLine("Unable to load main file", e);
+    throw;
+}
 
 
-var s = sm.NewScriptWithGlobals();
-sm.RunScript(s, "main.lua");
+var s = sm.NewScriptWithGlobals(pkgManger.Config.ModulePaths);
+sm.RunMainScript(s, "main.lua");
