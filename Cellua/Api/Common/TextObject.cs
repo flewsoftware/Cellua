@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using SFML.Graphics;
 using SFML.System;
 
@@ -18,11 +21,10 @@ namespace Cellua.Api.Common
             Text.Font = font.Font;
         }
 
-        public Tuple<float, float> GetPosition() => new(Text.Position.X, Text.Position.Y);
+        public IEnumerable<float> GetPosition() => new []{Text.Position.X, Text.Position.Y};
 
-        public void SetPosition(Tuple<float, float> position)
+        public void SetPosition(float x, float y)
         {
-            var (x, y) = position;
             Text.Position = new Vector2f(x, y);
         }
 
