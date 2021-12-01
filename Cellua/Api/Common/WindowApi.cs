@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cellua.Simulation;
 using SFML.Graphics;
 using SFML.System;
@@ -13,6 +14,7 @@ namespace Cellua.Api.Common
         public double Dt;
         public readonly Clock Clock;
         public readonly SceneObject Scene;
+        public List<TextObject> Texts;
         
         public WindowObject(RenderWindow renderWindow, Action<WindowObject> displayFunc)
         {
@@ -24,6 +26,7 @@ namespace Cellua.Api.Common
             };
             Clock = new();
             Scene = new SceneObject(new Scene(new SceneInfo(renderWindow.Size.X)));
+            Texts = new List<TextObject>();
         }
 
         public SceneObject GetScene() => Scene;
@@ -41,6 +44,16 @@ namespace Cellua.Api.Common
         public void SetFramerateLimit(uint framerate) => Window.SetFramerateLimit(framerate);
 
         public double GetFramerate() => 1.0 / Dt;
+
+        public void AddText(TextObject textObject)
+        {
+            Texts.Add(textObject);
+        }
+
+        public void RemoveText(TextObject textObject)
+        {
+            Texts.Remove(textObject);
+        }
     }
     
     public class WindowApi

@@ -1,5 +1,6 @@
 ﻿using System;
 using Cellua.Api.Common;
+using Cellua.Api.CommonManager;
 using Cellua.Core.PackageManager;
 using Api = Cellua.Api;
 using Cellua.Simulation;
@@ -27,6 +28,9 @@ catch (Exception e)
     throw;
 }
 
+FontManger fontManger = new();
+pkgManger.LoadFontsTo(fontManger);
+
 void RenderFunc(WindowObject wo)
 {
     wo.Window.DispatchEvents();
@@ -35,14 +39,19 @@ void RenderFunc(WindowObject wo)
     wo.Scene.Scene.UpdateTexture(worldTexture);
 
     wo.Window.Draw(worldSprite);
-
+    foreach (var textObject in wo.Texts)
+    {
+        wo.Window.Draw(textObject.Text);
+    }
+    
     wo.Window.Display();
     wo.Dt = wo.Clock.Restart().AsSeconds();
 }
 
 Api.Lua.ScriptManagerUtils.RegisterTypes();
 MoonSharp.Interpreter.Script.WarmUp();
-Api.Lua.ScriptManager sm = new(scene, window, RenderFunc);
+Api.Lua.ScriptManager sm = new(scene, window, RenderFunc, fontManger);
+
 
 try
 {
