@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Cellua.Api.Common;
 using Cellua.Random;
 using Cellua.Simulation;
 using MoonSharp.Interpreter;
+using MoonSharp.Interpreter.Loaders;
 using SFML.Graphics;
 
 namespace Cellua.Api.Lua
@@ -21,10 +21,10 @@ namespace Cellua.Api.Lua
             UserData.RegisterType<WindowObject>();
         }
     }
-    
+
     public class ScriptManager
     {
-        public Dictionary<string, string> Scripts;
+        public string MainScript;
 
         public readonly RandomApi RandomApi;
         public readonly WindowApi WindowApi;
@@ -35,12 +35,12 @@ namespace Cellua.Api.Lua
             RandomApi = new RandomApi();
             WindowApi = new WindowApi(window, renderFunc);
             SystemApi = new SystemApi();
-            Scripts = new Dictionary<string, string>();
+            MainScript = "";
         }
         
-        public Script NewScriptWithGlobals()
+        public Script NewScriptWithGlobals(string[] modulePath)
         {
-            return new Script
+           var s = new Script
             {
                 Globals =
                 {
@@ -49,21 +49,23 @@ namespace Cellua.Api.Lua
                     ["System"] = SystemApi
                 }
             };
+           var fileSystemLoader = new FileSystemScriptLoader
+           {
+               ModulePaths = modulePath
+           };
+           s.Options.ScriptLoader = fileSystemLoader;
+           return s;
         }
-
-        public void LoadFromFolder(string path)
+        
+        public void LoadMainFile(string file)
         {
-            var files = Directory.GetFiles(path, "**.lua");
-            foreach (var file in files)
-            {
-                var fileStream = File.ReadAllText(file);
-                Scripts[Path.GetFileName(file)] = fileStream;
-            }
+            var fileStream = File.ReadAllText(file);
+            MainScript = fileStream;
         }
-
-        public DynValue RunScript(Script s, string name)
+        
+        public DynValue RunMainScript(Script s, string name)
         {
-            return s.DoString(Scripts[name]);
+            return s.DoString(MainScript);
         }
     }
 }
