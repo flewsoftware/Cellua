@@ -63,7 +63,7 @@ namespace Cellua.Api.Lua
             MainScript = fileStream;
         }
         
-        public DynValue RunMainScript(Script s, string name)
+        public DynValue RunMainScript(Script s)
         {
             return s.DoString(MainScript);
         }

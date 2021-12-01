@@ -56,4 +56,4 @@ catch (Exception e)
 
 
 var s = sm.NewScriptWithGlobals(pkgManger.Config.ModulePaths);
-sm.RunMainScript(s, "main.lua");
+sm.RunMainScript(s);
