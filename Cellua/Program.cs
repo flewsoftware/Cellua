@@ -23,7 +23,7 @@ try
 }
 catch (Exception e)
 {
-    Console.WriteLine("Unable to find package.json in the current directory", e);
+    Console.WriteLine("Unable to load package.json.", e);
     throw;
 }
 
@@ -50,7 +50,7 @@ try
 }
 catch (Exception e)
 {
-    Console.WriteLine("Unable to load main file", e);
+    Console.WriteLine("Unable to load main file.", e);
     throw;
 }
 
