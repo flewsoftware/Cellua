@@ -5,13 +5,9 @@ using Cellua.Core.PackageManager;
 using Api = Cellua.Api;
 using Cellua.Simulation;
 using SFML.Graphics;
-using SFML.Window;
 
 var scene = new Scene(new SceneInfo(800));
 
-RenderWindow window = new(new VideoMode(scene.SceneInfo.Size, scene.SceneInfo.Size), "Cellua");
-window.SetFramerateLimit(0);
-window.Clear();
 
 Texture worldTexture = new(scene.SceneInfo.Size, scene.SceneInfo.Size);
 Sprite worldSprite = new(worldTexture);
@@ -50,7 +46,7 @@ void RenderFunc(WindowObject wo)
 
 Api.Lua.ScriptManagerUtils.RegisterTypes();
 MoonSharp.Interpreter.Script.WarmUp();
-Api.Lua.ScriptManager sm = new(scene, window, RenderFunc, fontManger);
+Api.Lua.ScriptManager sm = new(scene, RenderFunc, fontManger);
 
 
 try

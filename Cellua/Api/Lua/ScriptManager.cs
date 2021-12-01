@@ -37,10 +37,10 @@ namespace Cellua.Api.Lua
         public readonly FontApi FontApi;
         public readonly TextApi TextApi;
         
-        public ScriptManager(Scene scene, RenderWindow window, Action<WindowObject> renderFunc, FontManger fontManger)
+        public ScriptManager(Scene scene, Action<WindowObject> renderFunc, FontManger fontManger)
         {
             RandomApi = new RandomApi();
-            WindowApi = new WindowApi(window, renderFunc);
+            WindowApi = new WindowApi(renderFunc);
             SystemApi = new SystemApi();
             MainScript = "";
             FontApi = new FontApi(fontManger);

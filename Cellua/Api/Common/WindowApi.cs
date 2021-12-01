@@ -58,12 +58,10 @@ namespace Cellua.Api.Common
     
     public class WindowApi
     {
-        public RenderWindow Window;
         public readonly Action<WindowObject> DisplayFunc;
 
-        public WindowApi(RenderWindow window, Action<WindowObject> displayFunc)
+        public WindowApi(Action<WindowObject> displayFunc)
         {
-            Window = window;
             DisplayFunc = displayFunc;
         }
 
