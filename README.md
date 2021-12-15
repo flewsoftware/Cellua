@@ -1,5 +1,5 @@
 ﻿# What is Cellua?
-Cellua is a Cellular automata engine that can be scripted with lua to quickly prototype and experiment with different rules.
+Cellua is a fast cell based script-able graphics engine for grid based graphics
 
 # Usage
 1. Download the latest binary
