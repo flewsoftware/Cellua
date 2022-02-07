@@ -6,7 +6,6 @@ using Cellua.Random;
 using Cellua.Simulation;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Loaders;
-using SFML.Graphics;
 
 namespace Cellua.Api.Lua
 {
