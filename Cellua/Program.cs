@@ -4,6 +4,7 @@ using Cellua.Api.CommonManager;
 using Cellua.Core.PackageManager;
 using Api = Cellua.Api;
 using Cellua.Simulation;
+using MoonSharp.Interpreter;
 using SFML.Graphics;
 
 var scene = new Scene(new SceneInfo(800));
@@ -61,4 +62,16 @@ catch (Exception e)
 
 
 var s = sm.NewScriptWithGlobals(pkgManger.Config.ModulePaths);
-sm.RunMainScript(s);
+
+try
+{
+    sm.RunMainScript(s);
+}
+catch (ScriptRuntimeException runtimeException)
+{
+    Console.WriteLine("An runtime exception occured!\n {0}", runtimeException.DecoratedMessage);
+}
+catch (SyntaxErrorException syntaxError)
+{    
+    Console.WriteLine("An syntax error was found\n {0}", syntaxError.DecoratedMessage);
+}
